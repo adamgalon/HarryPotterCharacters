@@ -9,57 +9,51 @@ import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.harrypottercaracters.R
-import com.example.harrypottercaracters.data.models.CharactersItem
+import com.example.harrypottercaracters.data.models.Character
+import com.example.harrypottercaracters.databinding.ItemCharacterBinding
 
-class CharactersAdapter : RecyclerView.Adapter<CharacterViewHolder>() {
+class CharactersAdapter : RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder>() {
 
-    val charactersItems = ArrayList<CharactersItem>()
+    private val charactersItems = ArrayList<Character>()
 
-    fun setData(items: ArrayList<CharactersItem>) {
+    fun setData(items: List<Character>) {
         charactersItems.clear()
         charactersItems.addAll(items)
         notifyDataSetChanged()
     }
 
 
+    inner class CharacterViewHolder(private val binding: ItemCharacterBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        private lateinit var character: Character
+
+        fun bind(item: Character) {
+
+            character = item
+            binding.apply {
+                Glide.with(binding.root)
+                    .load(item.image.toUri().buildUpon().scheme("https").build())
+                    .error(R.drawable.ic_launcher_foreground)
+                    .into(binding.image)
+                name.text = item.name
+                house.text = item.house
+            }
+
+        }
+    }
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
-        return CharacterViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(
-                    R.layout.item_character,
-                    parent,
-                    false
-                )
-        )
+        val binding =
+            ItemCharacterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CharacterViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
+        holder.bind(charactersItems[position])
 
-        val url = charactersItems[position].image
-        val uri = url.toUri().buildUpon().scheme("https").build()
-
-        Glide.with(holder.itemView.context)
-            .load(uri)
-            .error(R.drawable.ic_launcher_foreground)
-            .into(holder.ivCharacter)
-        holder.tvName.text = charactersItems[position].name
-        holder.tvHouse.text = charactersItems[position].house
     }
 
     override fun getItemCount(): Int = charactersItems.size
-
-}
-
-class CharacterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val ivCharacter: ImageView
-    val tvName: TextView
-    val tvHouse: TextView
-
-    init {
-        ivCharacter = view.findViewById(R.id.image)
-        tvName = view.findViewById(R.id.name)
-        tvHouse = view.findViewById(R.id.house)
-    }
-
-
 }

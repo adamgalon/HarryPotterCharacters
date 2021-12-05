@@ -19,6 +19,7 @@ object RetrofitInstance {
         .baseUrl(BASE_URL)
         .client(client)
         .build()
+     val service = retrofit.create(CharacterService::class.java)
 
-    val apiCall by lazy { retrofit.create(CharacterService::class.java) }
+    val apiCall by lazy { service }
 }
