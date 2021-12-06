@@ -3,13 +3,12 @@ package com.example.harrypottercaracters.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-@Entity(tableName = "characters")
-data class Character(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    val actor: String,
+@Entity(tableName = "character")
+data class CharactersItem(
+    @PrimaryKey val actor: String,
     val alive: Boolean,
     val ancestry: String,
     val dateOfBirth: String,
@@ -25,12 +24,7 @@ data class Character(
     val species: String,
     val wizard: Boolean,
     val yearOfBirth: String
-):Serializable
+) : Serializable
 
-//    @SerializedName("alternate_actors")
-//    val alternateActors: List<Any>,
-//    @SerializedName("alternate_names")
-//    val alternateNames: List<Any>,
-
-
+//TODO: add TypeConverter
 //    val wand: Wand,

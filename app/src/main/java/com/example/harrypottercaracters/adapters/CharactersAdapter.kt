@@ -1,28 +1,25 @@
-package com.example.harrypottercaracters.ui
+package com.example.harrypottercaracters.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.harrypottercaracters.R
-import com.example.harrypottercaracters.data.models.Character
+import com.example.harrypottercaracters.data.models.CharactersItem
 import com.example.harrypottercaracters.databinding.ItemCharacterBinding
-import java.util.prefs.NodeChangeListener
 
 class CharactersAdapter(private val listener: CharacterItemListener) :
     RecyclerView.Adapter<CharacterViewHolder>() {
 
     interface CharacterItemListener {
-        fun onClickedCharacter(characterId: Int)
+        fun onClickedCharacter(characterName: CharactersItem)
     }
 
-    private val charactersItems = ArrayList<Character>()
+     val charactersItems = ArrayList<CharactersItem>()
 
-    fun setData(items: List<Character>) {
+    fun setData(items: List<CharactersItem>) {
         charactersItems.clear()
         charactersItems.addAll(items)
         notifyDataSetChanged()
@@ -49,13 +46,13 @@ class CharacterViewHolder(
 ) :
     RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
-    private lateinit var character: Character
+    private lateinit var character: CharactersItem
 
     init {
         binding.root.setOnClickListener(this)
     }
 
-    fun bind(item: Character) {
+    fun bind(item: CharactersItem) {
         this.character = item
         binding.apply {
             Glide.with(binding.root)
@@ -68,6 +65,6 @@ class CharacterViewHolder(
     }
 
     override fun onClick(v: View?) {
-        listener.onClickedCharacter(character.id)
+        listener.onClickedCharacter(character)
     }
 }

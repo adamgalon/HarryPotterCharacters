@@ -5,27 +5,25 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.harrypottercaracters.data.models.Character
+import com.example.harrypottercaracters.data.models.CharactersItem
 
 @Dao
 interface CharacterDao {
-
-    @Query("SELECT * FROM characters")
-    fun getAllCharacters(): LiveData<List<Character>>
-
-    @Query("SELECT * FROM characters WHERE id=:id ")
-    fun getCharacter(id: Int): Character
-
-    @Query("SELECT * FROM characters ORDER BY name ASC")
-    fun getStudentCharacters(): LiveData<List<Character>>
-
-    @Query("SELECT * FROM characters WHERE hogwartsStaff = 1  ORDER BY name ASC")
-    fun getStaffCharacters(): LiveData<List<Character>>
-
-    @Query("SELECT * FROM characters WHERE house=\"Gryffindor\" ORDER BY name ASC")
-    fun getByHouseCharacters(): LiveData<List<Character>>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(characters: List<Character>)
+    suspend fun insertAll(characters: List<CharactersItem>)
 
+    @Query("SELECT * FROM character ORDER BY name ASC ")
+    fun getAllCharacters(): LiveData<List<CharactersItem>>
+
+    @Query("SELECT * FROM character WHERE hogwartsStudent= 1 ORDER BY name ASC ")
+    fun getStudentCharacters(): LiveData<List<CharactersItem>>
+
+    @Query("SELECT * FROM character WHERE hogwartsStaff = 1  ORDER BY name ASC")
+    fun getStaffCharacters(): LiveData<List<CharactersItem>>
+
+    @Query("SELECT * FROM character WHERE house=:house ORDER BY name ASC")
+    fun getByHouseCharacters(house: String): LiveData<List<CharactersItem>>
 }
+
+
+

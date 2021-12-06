@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/all_characters"
+        android:title="All Characters" />
+    <item
+        android:id="@+id/student_characters"
+        android:title="Student Characters" />
+    <item
+        android:id="@+id/staff_characters"
+        android:title="Staff Characters" />
+    <item
+        android:id="@+id/house_characters"
+        android:title="By House Characters">
+        <menu>
+            <item
+                android:id="@+id/by_gryffindor"
+                android:title="Gryffindor" />
+            <item
+                android:id="@+id/by_slytherin"
+                android:title="Slytherin" />
+
+            <item
+                android:id="@+id/by_Hufflepuff"
+                android:title="Hufflepuff" />
+            <item
+                android:id="@+id/by_Ravenclaw"
+                android:title="Ravenclaw" />
+        </menu>
+
+    </item>
+</menu>

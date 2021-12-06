@@ -4,6 +4,6 @@ class CharacterRemoteDataSource(
     private val characterService: CharacterService
 ) : BaseDataSource() {
 
-    suspend fun getCharacters() = getResult { characterService.getAllCharacters() }
+    suspend fun getAllCharacters() = getResult { characterService.getAllCharacters() }
 
 }

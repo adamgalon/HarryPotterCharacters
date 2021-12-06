@@ -1,21 +1,29 @@
 package com.example.harrypottercaracters.data.repository
 
+import androidx.lifecycle.LiveData
 import com.example.harrypottercaracters.data.local.CharacterDao
+import com.example.harrypottercaracters.data.models.CharactersItem
 import com.example.harrypottercaracters.data.remote.CharacterRemoteDataSource
 import com.example.harrypottercaracters.utils.performGetOperation
 
 class CharactersRepository(
-    var remoteDataSource: CharacterRemoteDataSource,
-    var localDataSource: CharacterDao
+    private var remoteDataSource: CharacterRemoteDataSource,
+    private var localDataSource: CharacterDao
 ) {
 
-    fun getCharacters() = performGetOperation(
+    fun getAllCharacters() = performGetOperation(
         databaseQuery = { localDataSource.getAllCharacters() },
-        networkCall = { remoteDataSource.getCharacters() },
+        networkCall = { remoteDataSource.getAllCharacters() },
         saveCallResult = { localDataSource.insertAll(it) }
     )
 
-    fun getCharacter(id: Int) = localDataSource.getCharacter(id)
+    val getAll = localDataSource.getAllCharacters()
 
+    val byStudents = localDataSource.getStudentCharacters()
+
+    val getStaff = localDataSource.getStaffCharacters()
+
+    fun getByHouse(house: String): LiveData<List<CharactersItem>> {
+        return localDataSource.getByHouseCharacters(house)
+    }
 }
-
