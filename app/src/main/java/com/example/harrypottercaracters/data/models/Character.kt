@@ -3,11 +3,12 @@ package com.example.harrypottercaracters.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "characters")
 data class Character(
     @PrimaryKey(autoGenerate = true)
-    val id: Int? = null,
+    val id: Int,
     val actor: String,
     val alive: Boolean,
     val ancestry: String,
@@ -24,7 +25,7 @@ data class Character(
     val species: String,
     val wizard: Boolean,
     val yearOfBirth: String
-)
+):Serializable
 
 //    @SerializedName("alternate_actors")
 //    val alternateActors: List<Any>,

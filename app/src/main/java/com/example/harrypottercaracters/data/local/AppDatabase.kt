@@ -27,7 +27,8 @@ abstract class AppDatabase : RoomDatabase() {
                 context,
                 AppDatabase::class.java,
                 "characters"
-            ).build()
-
+            )
+                .fallbackToDestructiveMigration()
+                .build()
     }
 }

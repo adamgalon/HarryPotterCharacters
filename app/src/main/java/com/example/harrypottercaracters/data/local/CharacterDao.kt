@@ -11,7 +11,19 @@ import com.example.harrypottercaracters.data.models.Character
 interface CharacterDao {
 
     @Query("SELECT * FROM characters")
-    fun getAllCharacters() : LiveData<List<Character>>
+    fun getAllCharacters(): LiveData<List<Character>>
+
+    @Query("SELECT * FROM characters WHERE id=:id ")
+    fun getCharacter(id: Int): Character
+
+    @Query("SELECT * FROM characters ORDER BY name ASC")
+    fun getStudentCharacters(): LiveData<List<Character>>
+
+    @Query("SELECT * FROM characters WHERE hogwartsStaff = 1  ORDER BY name ASC")
+    fun getStaffCharacters(): LiveData<List<Character>>
+
+    @Query("SELECT * FROM characters WHERE house=\"Gryffindor\" ORDER BY name ASC")
+    fun getByHouseCharacters(): LiveData<List<Character>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(characters: List<Character>)

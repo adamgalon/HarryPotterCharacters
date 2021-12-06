@@ -9,5 +9,4 @@ interface CharacterService {
     @GET("/api/characters")
     suspend fun getAllCharacters(): Response<ArrayList<Character>>
 
-
 }

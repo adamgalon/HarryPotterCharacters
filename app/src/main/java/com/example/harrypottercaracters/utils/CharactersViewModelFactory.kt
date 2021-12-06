@@ -1,10 +1,9 @@
 package com.example.harrypottercaracters.utils
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.harrypottercaracters.data.repository.CharactersRepository
-import com.example.harrypottercaracters.ui.CharactersViewModel
+import com.example.harrypottercaracters.ui.mainactivity.CharactersViewModel
 
 class CharactersViewModelFactory(
     private val repository: CharactersRepository
