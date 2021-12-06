@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(), CharactersAdapter.CharacterItemListene
         setupViewModelFactory()
         setupRecyclerView()
 
-        viewModel.getAllCharacters.observe(this, Observer {
+        viewModel.getAllCharacters.observe(this, {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     if (it.data != null) adapter.setData(it.data)
@@ -113,7 +113,6 @@ class MainActivity : AppCompatActivity(), CharactersAdapter.CharacterItemListene
                     adapter.setData(it)
 
                 })
-                Toast.makeText(baseContext, "Gryffindor", Toast.LENGTH_SHORT).show()
                 true
             }
             R.id.by_Hufflepuff -> {
@@ -121,7 +120,6 @@ class MainActivity : AppCompatActivity(), CharactersAdapter.CharacterItemListene
                     adapter.setData(it)
 
                 })
-                Toast.makeText(baseContext, "By House Characters", Toast.LENGTH_SHORT).show()
                 true
             }
             R.id.by_slytherin -> {
@@ -129,7 +127,6 @@ class MainActivity : AppCompatActivity(), CharactersAdapter.CharacterItemListene
                     adapter.setData(it)
 
                 })
-                Toast.makeText(baseContext, "By House Characters", Toast.LENGTH_SHORT).show()
                 true
             }
             R.id.by_Ravenclaw -> {
@@ -137,7 +134,6 @@ class MainActivity : AppCompatActivity(), CharactersAdapter.CharacterItemListene
                     adapter.setData(it)
 
                 })
-                Toast.makeText(baseContext, "By House Characters", Toast.LENGTH_SHORT).show()
                 true
             }
 
