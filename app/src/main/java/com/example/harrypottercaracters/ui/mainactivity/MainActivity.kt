@@ -3,12 +3,10 @@ package com.example.harrypottercaracters.ui.mainactivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.harrypottercaracters.R
@@ -85,14 +83,14 @@ class MainActivity : AppCompatActivity(), CharactersAdapter.CharacterItemListene
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.all_characters -> {
-                viewModel.getAll.observe(this, Observer {
+                viewModel.getAll.observe(this, {
                     adapter.setData(it)
                 })
                 true
             }
 
             R.id.student_characters -> {
-                viewModel.getByStudent.observe(this, Observer {
+                viewModel.getByStudent.observe(this, {
                     adapter.setData(it)
                 })
 
@@ -100,7 +98,7 @@ class MainActivity : AppCompatActivity(), CharactersAdapter.CharacterItemListene
             }
             R.id.staff_characters -> {
                 Toast.makeText(baseContext, "Staff Characters", Toast.LENGTH_SHORT).show()
-                viewModel.getStaff.observe(this, Observer {
+                viewModel.getStaff.observe(this, {
                     adapter.setData(it)
                 })
                 true
@@ -109,30 +107,28 @@ class MainActivity : AppCompatActivity(), CharactersAdapter.CharacterItemListene
                 true
             }
             R.id.by_gryffindor -> {
-                viewModel.getByHouse("Gryffindor").observe(this, Observer {
+                viewModel.getByHouse("Gryffindor").observe(this, {
                     adapter.setData(it)
 
                 })
                 true
             }
             R.id.by_Hufflepuff -> {
-                viewModel.getByHouse("Hufflepuff").observe(this, Observer {
+                viewModel.getByHouse("Hufflepuff").observe(this, {
                     adapter.setData(it)
 
                 })
                 true
             }
             R.id.by_slytherin -> {
-                viewModel.getByHouse("Slytherin").observe(this, Observer {
+                viewModel.getByHouse("Slytherin").observe(this, {
                     adapter.setData(it)
-
                 })
                 true
             }
             R.id.by_Ravenclaw -> {
-                viewModel.getByHouse("Ravenclaw").observe(this, Observer {
+                viewModel.getByHouse("Ravenclaw").observe(this, {
                     adapter.setData(it)
-
                 })
                 true
             }
