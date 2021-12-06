@@ -14,7 +14,7 @@ class CharactersAdapter(private val listener: CharacterItemListener) :
     RecyclerView.Adapter<CharacterViewHolder>() {
 
     interface CharacterItemListener {
-        fun onClickedCharacter(characterName: CharactersItem)
+        fun onClickedCharacter(character: CharactersItem)
     }
 
      val charactersItems = ArrayList<CharactersItem>()
