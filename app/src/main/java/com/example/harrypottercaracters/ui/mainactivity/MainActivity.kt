@@ -33,6 +33,8 @@ class MainActivity : AppCompatActivity(), CharactersAdapter.CharacterItemListene
         setupViewModelFactory()
         setupRecyclerView()
 
+
+        //TODO: Check if is other way of providing data to UI
         viewModel.getAllCharacters.observe(this, {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
@@ -49,7 +51,6 @@ class MainActivity : AppCompatActivity(), CharactersAdapter.CharacterItemListene
         })
 
     }
-
 
     private fun setupRecyclerView() {
         adapter = CharactersAdapter(this)
